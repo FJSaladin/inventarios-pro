@@ -3,7 +3,7 @@ import { supabase } from "../supabase/supabase.config";
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
+export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState([]);
     useEffect(()=>{
         
@@ -23,4 +23,13 @@ export const AuthProvider = ({ children }) => {
         }
 
     },[])
+    return(
+        <AuthContext.Provider value={{user}}>
+                {children}
+        </AuthContext.Provider>
+    )
 };
+
+export const UserAuth = () => {
+    return useContext(AuthContext);
+}
